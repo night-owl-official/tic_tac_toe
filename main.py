@@ -32,5 +32,18 @@ def update_board(new_value: str, at_position: int, board_values: list):
     board_values[at_position - 1] = new_value
 
 
+def reset_board(board_values: list):
+    """
+    Resets the board values to be the default ones.
+
+        Parameters:
+            board_values (list): A list of the board values.
+    """
+
+    # Loop through the board values and set them all to the default value
+    for i in range(len(board_values)):
+        board_values[i] = ' '
+
+
 # The tic tac toe board values
 ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
