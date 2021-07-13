@@ -45,5 +45,42 @@ def reset_board(board_values: list):
         board_values[i] = ' '
 
 
+def get_user_choice() -> int:
+    """
+    Runs until the user inputs a valid choice and returns the latter.
+
+        Returns:
+             user_choice (int): A valid choice from the user (a number between 1 and 9).
+    """
+
+    user_choice = ""
+
+    # Keep looping until the user enters a valid number
+    is_valid = False
+    while not is_valid:
+        user_choice = input("Please enter a number (1-9): ")
+
+        # User entered a string not convertible into a number
+        if not user_choice.isdigit():
+            print("*That was not a number!*\n")
+            continue
+
+        # At this point, the user entered a number,
+        # we can convert the string into an integer
+        user_choice = int(user_choice)
+
+        # User entered a number but it wasn't in the correct range
+        if user_choice not in range(1, 10):
+            print("*The number you entered is not valid!*\n")
+            continue
+
+        # At this point, the user entered a valid number
+        # we can stop prompting them to enter a number
+        is_valid = True
+
+    return user_choice
+
+
 # The tic tac toe board values
 ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+print(get_user_choice())
