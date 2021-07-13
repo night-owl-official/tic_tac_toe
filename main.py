@@ -120,6 +120,61 @@ def set_players_markers(p_data: dict):
         break
 
 
+def check_win_or_draw(board_values: list, p_data: dict) -> str:
+    """
+    Checks the board to see if somebody has won the game or if it was a draw.
+
+        Parameters:
+            board_values (list): A list of values representing the board.
+            p_data (dict): A dictionary holding player's data. (markers associated to each player)
+
+        Returns:
+            A string containing the name of the winner if there was one, or draw if it was a draw.
+            It can also return None in case it's neither a draw nor a win.
+    """
+
+    # Count how many blank spaces there are on the board
+    blank_space_count = 0
+    for val in board_values:
+        if val == ' ':
+            blank_space_count += 1
+
+    # More than 4 blank spaces and the game can't be a draw or a win
+    if blank_space_count <= 4:
+        # Horizontal check
+        if (board_values[6] != ' ') and (board_values[6] == board_values[7]) and (board_values[6] == board_values[8]):
+            return "Player 1" if (board_values[6] == p_data["p1"]) else "Player 2"
+        elif (board_values[3] != ' ') and (board_values[3] == board_values[4]) and (board_values[3] == board_values[5]):
+            return "Player 1" if (board_values[3] == p_data["p1"]) else "Player 2"
+        elif (board_values[0] != ' ') and (board_values[0] == board_values[1]) and (board_values[0] == board_values[2]):
+            return "Player 1" if (board_values[0] == p_data["p1"]) else "Player 2"
+
+        # Vertical check
+        if (board_values[6] != ' ') and (board_values[6] == board_values[3]) and (board_values[6] == board_values[0]):
+            return "Player 1" if (board_values[6] == p_data["p1"]) else "Player 2"
+        elif (board_values[7] != ' ') and (board_values[7] == board_values[4]) and (board_values[7] == board_values[1]):
+            return "Player 1" if (board_values[7] == p_data["p1"]) else "Player 2"
+        elif (board_values[8] != ' ') and (board_values[8] == board_values[5]) and (board_values[8] == board_values[2]):
+            return "Player 1" if (board_values[8] == p_data["p1"]) else "Player 2"
+
+        # Diagonal check
+        if (board_values[6] != ' ') and (board_values[6] == board_values[4]) and (board_values[6] == board_values[2]):
+            return "Player 1" if (board_values[6] == p_data["p1"]) else "Player 2"
+        elif (board_values[8] != ' ') and (board_values[8] == board_values[4]) and (board_values[8] == board_values[0]):
+            return "Player 1" if (board_values[8] == p_data["p1"]) else "Player 2"
+
+        # Nobody won yet and there are no blank spaces left
+        # the game is a draw
+        if blank_space_count == 0:
+            return "Draw"
+
+        # Game isn't over yet
+        return ""
+
+    # Game isn't over yet
+    return ""
+
+
 def want_to_play_again():
     """
     Asks the user if they want to play again and validate their input.
