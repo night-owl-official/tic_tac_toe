@@ -26,10 +26,19 @@ def update_board(new_value: str, at_position: int, board_values: list):
             new_value (str): A value to set on the board (O, X, ' ').
             at_position (int): A position representing one of the available positions on the board (numpad).
             board_values (list): A list for the values currently set on the board.
+
+        Returns:
+            A boolean value holding False when the board can't be updated and True otherwise.
     """
 
-    # Update the given board value
-    board_values[at_position - 1] = new_value
+    # The chosen position is available
+    if board_values[at_position - 1] == ' ':
+        # Update the given board value
+        board_values[at_position - 1] = new_value
+        return True
+
+    # Board position is already taken
+    return False
 
 
 def reset_board(board_values: list):
@@ -138,9 +147,15 @@ def start_game():
         # Ask the current player where they want to place their marker
         # and update the board based on the current player's marker and where
         # they placed it
-        update_board(player_data[player_turn], get_user_choice(), ttt_board_values)
+        board_updated = update_board(player_data[player_turn], get_user_choice(), ttt_board_values)
         # Display the updated board
         display_board(ttt_board_values)
+
+        # When the board couldn't be updated warn the user
+        # and prompt them again to enter a position
+        if not board_updated:
+            print("\n*The chosen position is already taken!*")
+            continue
 
         # Now the next player can place their marker
         # update player's turn
