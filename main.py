@@ -81,5 +81,28 @@ def get_user_choice() -> int:
     return user_choice
 
 
+def set_players_markers(p_data: dict):
+    """
+    Asks the player 1 what marker they want and sets the markers for both players.
+
+        Parameters:
+            p_data (dict): A dictionary for player's data. (It will store markers for both players).
+    """
+
+    while True:
+        p1_choice = input("Player 1, choose your marker (X, O): ")
+
+        if p1_choice.lower() not in ['x', 'o']:
+            print("*This marker does not exist!*\n")
+            continue
+
+        p_data["p1"] = p1_choice.upper()
+        p_data["p2"] = 'O' if (p1_choice.lower() == 'x') else 'X'
+
+        break
+
+
 # The tic tac toe board values
 ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+# The player data to hold the markers
+player_data = dict()
