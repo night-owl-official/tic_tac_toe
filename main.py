@@ -111,7 +111,45 @@ def set_players_markers(p_data: dict):
         break
 
 
-# The tic tac toe board values
-ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-# The player data to hold the markers
-player_data = dict()
+def start_game():
+    """
+    Contains the game loop and runs the game logic.
+    """
+
+    # The tic tac toe board values
+    ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    # The player data to hold the markers
+    player_data = dict()
+    # Flag used to start or stop a new game
+    is_playing = True
+    # The current player's turn
+    player_turn = "p1"
+
+    # Set the player markers
+    set_players_markers(player_data)
+    # Display the initial state of the board
+    display_board(ttt_board_values)
+
+    # Tell the user who is to play now
+    print("\nPlayer 1, it's your turn!")
+
+    # Keep the game loop going until the user doesn't want to play anymore
+    while is_playing:
+        # Ask the current player where they want to place their marker
+        # and update the board based on the current player's marker and where
+        # they placed it
+        update_board(player_data[player_turn], get_user_choice(), ttt_board_values)
+        # Display the updated board
+        display_board(ttt_board_values)
+
+        # Now the next player can place their marker
+        # update player's turn
+        player_turn = "p1" if (player_turn == "p2") else "p2"
+        # Tell the user who is to play now
+        player_name = "Player 1" if (player_turn == "p1") else "Player 2"
+        print(f"\n{player_name}, it's your turn!")
+
+
+if __name__ == "__main__":
+    # Run the game
+    start_game()
