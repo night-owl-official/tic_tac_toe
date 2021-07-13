@@ -120,6 +120,33 @@ def set_players_markers(p_data: dict):
         break
 
 
+def want_to_play_again():
+    """
+    Asks the user if they want to play again and validate their input.
+
+        Returns:
+            A boolean value holding True if they answer yes and False otherwise.
+    """
+
+    # Keep asking the user if they want to play again until their answer is valid
+    while True:
+        user_choice = input("Do you want to play again (Yes/No)? ")
+
+        # Check if the user input is a valid answer (case insensitive)
+        # ask for their input again when not a valid answer
+        if user_choice.lower() not in ["yes", "no", 'y', 'n']:
+            print("*That was not a valid answer!*\n")
+            continue
+
+        # At this point, the user input is valid
+        # return true if they want to play again
+        if user_choice.lower() in ["yes", 'y']:
+            return True
+
+        # Return false if they don't want to play again
+        return False
+
+
 def start_game():
     """
     Contains the game loop and runs the game logic.
