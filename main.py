@@ -58,7 +58,7 @@ def get_user_choice() -> int:
     # Keep looping until the user enters a valid number
     is_valid = False
     while not is_valid:
-        user_choice = input("Please enter a number (1-9): ")
+        user_choice = input("Please select a position (1-9): ")
 
         # User entered a string not convertible into a number
         if not user_choice.isdigit():
@@ -71,7 +71,7 @@ def get_user_choice() -> int:
 
         # User entered a number but it wasn't in the correct range
         if user_choice not in range(1, 10):
-            print("*The number you entered is not valid!*\n")
+            print("*The position you entered is not valid!*\n")
             continue
 
         # At this point, the user entered a valid number
@@ -83,4 +83,3 @@ def get_user_choice() -> int:
 
 # The tic tac toe board values
 ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-print(get_user_choice())
