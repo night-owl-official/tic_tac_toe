@@ -89,16 +89,25 @@ def set_players_markers(p_data: dict):
             p_data (dict): A dictionary for player's data. (It will store markers for both players).
     """
 
+    # Keep looping until the user enters a valid marker
     while True:
+        # Store the user's choice in a variable
         p1_choice = input("Player 1, choose your marker (X, O): ")
 
+        # Check if the user's choice is a valid marker
+        # we keep this case insensitive
         if p1_choice.lower() not in ['x', 'o']:
             print("*This marker does not exist!*\n")
             continue
 
+        # At this point, the user entered a valid marker
+        # we assign the chosen marker to player 1 (uppercase)
+        # and the opposite marker goes to player 2 (uppercase as well)
         p_data["p1"] = p1_choice.upper()
         p_data["p2"] = 'O' if (p1_choice.lower() == 'x') else 'X'
 
+        # All the markers have been assigned
+        # we can stop the loop
         break
 
 
