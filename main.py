@@ -202,6 +202,26 @@ def want_to_play_again():
         return False
 
 
+def restart_game(p_turn: str, board_values: list):
+    """
+    Reverts the settings to the way they were at the start of the game.
+
+        Parameters:
+            p_turn (str): A string used for the current player turn.
+            board_values (list): A list for the board values.
+    """
+
+    # Reset the player turn
+    p_turn = "p1"
+    # Reset the board to the default
+    reset_board(board_values)
+    # Display the initial state of the board
+    display_board(board_values)
+
+    # Tell the user who is to play now
+    print("\nPlayer 1, it's your turn!")
+
+
 def start_game():
     """
     Contains the game loop and runs the game logic.
@@ -211,8 +231,6 @@ def start_game():
     ttt_board_values = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     # The player data to hold the markers
     player_data = dict()
-    # Flag used to start or stop a new game
-    is_playing = True
     # The current player's turn
     player_turn = "p1"
 
@@ -225,7 +243,7 @@ def start_game():
     print("\nPlayer 1, it's your turn!")
 
     # Keep the game loop going until the user doesn't want to play anymore
-    while is_playing:
+    while True:
         # Ask the current player where they want to place their marker
         # and update the board based on the current player's marker and where
         # they placed it
@@ -241,10 +259,6 @@ def start_game():
 
         # Check if somebody won or for a draw
         winner = check_win_or_draw(ttt_board_values, player_data)
-        if winner == "Draw":
-            print("\nIt was a draw!")
-        elif winner != "":
-            print(f"\n{winner} has won the game!")
 
         # Now the next player can place their marker
         # update player's turn
