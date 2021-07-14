@@ -130,7 +130,7 @@ def check_win_or_draw(board_values: list, p_data: dict) -> str:
 
         Returns:
             A string containing the name of the winner if there was one, or draw if it was a draw.
-            It can also return None in case it's neither a draw nor a win.
+            It can also return an empty string in case it's neither a draw nor a win.
     """
 
     # Count how many blank spaces there are on the board
@@ -238,6 +238,13 @@ def start_game():
         if not board_updated:
             print("\n*The chosen position is already taken!*")
             continue
+
+        # Check if somebody won or for a draw
+        winner = check_win_or_draw(ttt_board_values, player_data)
+        if winner == "Draw":
+            print("\nIt was a draw!")
+        elif winner != "":
+            print(f"\n{winner} has won the game!")
 
         # Now the next player can place their marker
         # update player's turn
