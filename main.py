@@ -260,6 +260,22 @@ def start_game():
         # Check if somebody won or for a draw
         winner = check_win_or_draw(ttt_board_values, player_data)
 
+        if winner != "":
+            # Tell the user who won or if it was a draw
+            if winner == "Draw":
+                print("\nIt was a draw!")
+            else:
+                print(f"\n{winner} has won the game!")
+
+            # Ask the user if they want to play again
+            # if yes then restart the game
+            # if no then exit the game loop
+            if want_to_play_again():
+                restart_game(player_turn, ttt_board_values)
+                continue
+            else:
+                break
+
         # Now the next player can place their marker
         # update player's turn
         player_turn = "p1" if (player_turn == "p2") else "p2"
